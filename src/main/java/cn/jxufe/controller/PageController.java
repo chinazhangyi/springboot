@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class PageController {
 
-    @RequestMapping("/{page}")
-    public String getUser(@PathVariable String page){
-        return page;
+    @RequestMapping("page_{url}")
+    public String getUser(@PathVariable String url){
+        return url;
     }
 
 
