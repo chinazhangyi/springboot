@@ -9,4 +9,5 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface GoodsCategoryDAO extends MyBatisBaseDao<GoodsCategory, Integer> {
+
 }

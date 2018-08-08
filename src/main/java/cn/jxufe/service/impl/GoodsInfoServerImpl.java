@@ -22,4 +22,9 @@ public class GoodsInfoServerImpl implements GoodsInfoServer {
     public List<Goodsinfo> findAllGoods() {
         return goodsinfoDAO.findAllGoods();
     }
+
+    @Override
+    public Goodsinfo findGoodById(Integer id) {
+        return goodsinfoDAO.selectByPrimaryKey(id);
+    }
 }

@@ -10,6 +10,7 @@
     <result column="adv_link_url" jdbcType="VARCHAR" property="advLinkUrl" />
     <result column="adv_cratetime" jdbcType="TIMESTAMP" property="advCratetime" />
     <result column="adv_updatetime" jdbcType="TIMESTAMP" property="advUpdatetime" />
+
   </resultMap>
   <sql id="Base_Column_List">
     adv_id, adv_title, adv_pic_url, adv_offline, adv_order, adv_link_url, adv_cratetime, 
@@ -126,4 +127,13 @@
       adv_updatetime = #{advUpdatetime,jdbcType=TIMESTAMP}
     where adv_id = #{advId,jdbcType=INTEGER}
   </update>
+
+  <select id="findOnLineList" parameterType="java.util.Map" resultMap="BaseResultMap">
+    SELECT * FROM advertisement
+    <where>
+      <if test="map.advOffline!=null">
+        adv_offline=${map.advOffline}
+      </if>
+    </where>
+  </select>
 </mapper>

@@ -22,11 +22,13 @@
     <result column="stock" jdbcType="INTEGER" property="stock" />
     <result column="update_time" jdbcType="BIGINT" property="updateTime" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="goods_oldprice" jdbcType="DOUBLE" property="goodsOldPrice"/>
+    <result column="goods_price" jdbcType="DOUBLE" property="goodsPrice"/>
   </resultMap>
   <sql id="Base_Column_List">
     goods_id, goods_name, goods_subtitle, gc_id, gc_name, goods_image, goods_click, goods_state, 
     goods_commend, goods_description, goods_close_reason, comment_num, thumbs_up_num, 
-    salenum_num, goods_collect_num, is_del, member_id, stock, update_time, create_time
+    salenum_num, goods_collect_num, is_del, member_id, stock, update_time, create_time,goods_oldprice,goods_price
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 

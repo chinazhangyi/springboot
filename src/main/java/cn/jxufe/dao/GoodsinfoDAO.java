@@ -16,4 +16,6 @@ public interface GoodsinfoDAO extends MyBatisBaseDao<Goodsinfo, Integer> {
      * @return
      */
     public List<Goodsinfo> findAllGoods();
+
+
 }

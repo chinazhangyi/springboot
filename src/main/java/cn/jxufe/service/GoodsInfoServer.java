@@ -9,4 +9,5 @@ import java.util.List;
  */
 public interface GoodsInfoServer {
     public List<Goodsinfo>findAllGoods();
+    public Goodsinfo findGoodById(Integer id);
 }

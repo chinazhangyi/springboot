@@ -58,16 +58,16 @@
 <header>
   <a href="location.jsp" class="location">深圳市</a>
   <h1>合众饰品专卖</h1>
-  <a href="search.jsp" class="rt_searchIcon">&#37;</a>
+  <a href="page_search" class="rt_searchIcon">&#37;</a>
 </header>
 <!--slide-->
 <div class="slide">
   <div class="swiper-wrapper">
       <%--循环顶部图片--%>
-      <c:forEach items="${list}" var="b">
+      <c:forEach items="${alist}" var="a">
     <div class="swiper-slide">
-      <a href="#">
-        <img src="upload/${b.brandPic}"/>
+      <a href="${a.advLinkUrl}">
+        <img src="${a.advPicUrl}"/>
       </a>
     </div>
       </c:forEach>
@@ -79,126 +79,33 @@
 <dl class="tab_proList">
   <dd>
     <ul>
-      <li>
-        <div class="productArea">
-          <a href="product.jsp" class="goodsPic">
-            <img src="../../upload/goods001.jpg"/>
-          </a>
-          <div class="goodsInfor">
-            <h2>
-              <a href="product.jsp">水晶骷髅头 截取字符串...</a>
-            </h2>
-            <p>
-              <del>5.90</del>
-            </p>
-            <p>
-              <strong class="price">3.90</strong>
-            </p>
-            <a class="addToCart">&#126;</a>
-          </div>
-        </div>
-        <aside>
-          <a class="like_icon">580</a>
-          <a class="comment_icon">260</a>
-          <a class="deal_icon">355</a>
-        </aside>
-      </li>
-      <li>
-        <div class="productArea">
-          <a href="product.jsp" class="goodsPic">
-            <img src="../../upload/goods002.jpg"/>
-          </a>
-          <div class="goodsInfor">
-            <h2>
-              <a href="product.jsp">烟灰缸 玻璃工艺品...</a>
-            </h2>
-            <p>
-              <del>5.90</del>
-            </p>
-            <p>
-              <strong class="price">3.90</strong>
-            </p>
-            <a class="addToCart">&#126;</a>
-          </div>
-        </div>
-        <aside>
-          <a class="like_icon">1100</a>
-          <a class="comment_icon">420</a>
-          <a class="deal_icon">299</a>
-        </aside>
-      </li>
-      <li>
-        <div class="productArea">
-          <a href="product.jsp" class="goodsPic">
-            <img src="../../upload/goods003.jpg"/>
-          </a>
-          <div class="goodsInfor">
-            <h2>
-              <a href="product.jsp">迷你花杯 送底座</a>
-            </h2>
-            <p>
-              <del>19.90</del>
-            </p>
-            <p>
-              <strong class="price">12.90</strong>
-            </p>
-            <a class="addToCart">&#126;</a>
-          </div>
-        </div>
-        <aside>
-          <a class="like_icon">580</a>
-          <a class="comment_icon">260</a>
-          <a class="deal_icon">355</a>
-        </aside>
-      </li>
-      <li>
-        <div class="productArea">
-          <a href="product.jsp" class="goodsPic">
-            <img src="../../upload/goods004.jpg"/>
-          </a>
-          <div class="goodsInfor">
-            <h2>
-              <a href="product.jsp">开光招财 聚财貔貅风水摆件</a>
-            </h2>
-            <p>
-              <del>99.90</del>
-            </p>
-            <p>
-              <strong class="price">69.90</strong>
-            </p>
-            <a class="addToCart">&#126;</a>
-          </div>
-        </div>
-        <aside>
-          <a class="like_icon">80</a>
-          <a class="comment_icon">60</a>
-          <a class="deal_icon">55</a>
-        </aside>
-      </li>
-      <li>
-        <div class="productArea">
-          <a href="product.jsp" class="goodsPic">
-            <img src="../../upload/goods005.jpg"/>
-          </a>
-          <div class="goodsInfor">
-            <h2>
-              <a href="product.jsp">翅琉璃对 天鹅新房摆件...</a>
-            </h2>
-            <p>
-              <del>88.90</del>
-            </p>
-            <p>
-              <strong class="price">59.90</strong>
-            </p>
-            <a class="addToCart">&#126;</a>
-          </div>
-        </div>
-        <aside>
-          <a class="like_icon">50</a>
-          <a class="comment_icon">20</a>
-          <a class="deal_icon">35</a>
-        </aside>
-      </li>
+     <c:forEach items="${glist}" var="g">
+       <li>
+         <div class="productArea">
+           <a href="product?id=${g.goodsId}" class="goodsPic">
+             <img src="${g.goodsImage}"/>
+           </a>
+           <div class="goodsInfor">
+             <h2>
+               <a href="product.jsp">${g.goodsName}</a>
+             </h2>
+             <p>
+               <del>${g.goodsOldPrice}</del>
+             </p>
+             <p>
+               <strong class="price">${g.goodsPrice}</strong>
+             </p>
+             <a class="addToCart">&#126;</a>
+           </div>
+         </div>
+         <aside>
+           <a class="like_icon">${g.goodsCollectNum}</a>
+           <a class="comment_icon">${g.commentNum}</a>
+           <a class="deal_icon">${g.thumbsUpNum}</a>
+         </aside>
+       </li>
+     </c:forEach>
+
     </ul>
   </dd>
 </dl>
@@ -209,10 +116,10 @@
 <!--fixedNav:footer-->
 <div style="height:1.2rem;"></div>
 <nav>
-  <a href="index.jsp" class="homeIcon">首页</a>
-  <a href="category.jsp" class="categoryIcon">分类</a>
-  <a href="cart.jsp" class="cartIcon">购物车</a>
-  <a href="user.jsp" class="userIcon">我的</a>
+  <a href="index" class="homeIcon">首页</a>
+  <a href="page_category" class="categoryIcon">分类</a>
+  <a href="page_cart" class="cartIcon">购物车</a>
+  <a href="page_user" class="userIcon">我的</a>
 </nav>
 </body>
 </html>

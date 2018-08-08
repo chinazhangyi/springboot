@@ -108,6 +108,33 @@ public class Goodsinfo implements Serializable {
      */
     private Date createTime;
 
+    /**
+     * 商品原价
+     */
+    private double goodsOldPrice;
+
+    public double getGoodsOldPrice() {
+        return goodsOldPrice;
+    }
+
+    public void setGoodsOldPrice(double goodsOldPrice) {
+        this.goodsOldPrice = goodsOldPrice;
+    }
+
+    public double getGoodsPrice() {
+        return goodsPrice;
+    }
+
+    public void setGoodsPrice(double goodsPrice) {
+        this.goodsPrice = goodsPrice;
+    }
+
+    /**
+     * 商品售价
+
+     */
+    private  double goodsPrice;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getGoodsId() {
