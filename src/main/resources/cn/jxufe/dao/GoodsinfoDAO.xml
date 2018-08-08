@@ -274,4 +274,15 @@
     SELECT * FROM `goodsinfo`
   </select>
 
+  <select id="findGoodsByType" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    SELECT * FROM goodsinfo
+     <where>
+       <if test="catId!=null">
+         gc_id=#{catId}
+       </if>
+     </where>
+
+
+  </select>
+
 </mapper>

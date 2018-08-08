@@ -2,6 +2,7 @@ package cn.jxufe.dao;
 
 import cn.jxufe.entity.Memberinfo;
 
+import org.jboss.logging.Param;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -9,4 +10,5 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface MemberinfoDAO extends MyBatisBaseDao<Memberinfo, Integer> {
+
 }

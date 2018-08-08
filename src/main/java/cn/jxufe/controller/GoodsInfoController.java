@@ -8,6 +8,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
+
 /**
  * Created by Zhang on 2018/8/7.
  */
@@ -30,5 +32,17 @@ public class GoodsInfoController {
         System.out.println(good);
         return "product";
     }
+
+
+//    http://localhost:8080/goodskind?catId=1
+//    @RequestMapping("goodskind")
+//    @ResponseBody
+//    public Object findbytype(Integer catId){
+//        List<Goodsinfo> goodsByType = goodsInfoServer.findGoodsByType(catId);
+//        return goodsByType;
+//    }
+
+    //    http://localhost:8080/goodskind?catId=1
+
 
 }

@@ -111,13 +111,13 @@
 </dl>
 <!--floatCart-->
 <div class="hoverCart">
-  <a href="cart.jsp">0</a>
+  <a href="page_cart">0</a>
 </div>
 <!--fixedNav:footer-->
 <div style="height:1.2rem;"></div>
 <nav>
   <a href="index" class="homeIcon">首页</a>
-  <a href="page_category" class="categoryIcon">分类</a>
+  <a href="category" class="categoryIcon">分类</a>
   <a href="page_cart" class="cartIcon">购物车</a>
   <a href="page_user" class="userIcon">我的</a>
 </nav>

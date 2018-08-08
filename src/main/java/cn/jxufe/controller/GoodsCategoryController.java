@@ -23,8 +23,8 @@ public class GoodsCategoryController {
     @RequestMapping("category")
     public String findtype(ModelMap map,Integer catId){
         List<GoodsCategory> gtype = goodsCategoryService.findtype();
-       // List<Goodsinfo> goodsByType = goodsInfoServer.findGoodsByType(catId);
-     //   map.put("goodsByType",goodsByType);
+        List<Goodsinfo> goodsByType = goodsInfoServer.findGoodsByType(catId);
+        map.put("goodsByType",goodsByType);
         map.put("gtype",gtype);
         return "category";
     }

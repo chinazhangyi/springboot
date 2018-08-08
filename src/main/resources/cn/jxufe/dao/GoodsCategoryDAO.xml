@@ -114,4 +114,8 @@
       updated_time = #{updatedTime,jdbcType=TIMESTAMP}
     where cat_id = #{catId,jdbcType=INTEGER}
   </update>
+
+  <select id="findtype" resultMap="BaseResultMap">
+    SELECT  * FROM goods_category
+  </select>
 </mapper>
