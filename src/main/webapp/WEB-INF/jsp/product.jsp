@@ -29,8 +29,12 @@
 $(document).ready(function(){
   //效果测试，程序对接可将其删除
   $(".add_btn").click(function(){
+   $.post("putcart"+$(this).attr("title"),function(){});
 	  $(".cart_icon em").html(parseInt($(".cart_icon em").html())+1);
+
+
 	  });
+
 });
 </script>
 </head>
@@ -49,7 +53,7 @@ $(document).ready(function(){
  <p>
   <strong>${good.goodsPrice}</strong>
   <del>${good.goodsOldPrice}</del>
-  <a class="add_btn">加入购物车</a>
+  <a class="add_btn" title="${good.goodsId}">加入购物车</a>
  </p>
 </section>
 <!--product infor-->
@@ -81,7 +85,7 @@ $(document).ready(function(){
 <div style="height:1rem;"></div>
 <aside class="btmNav">
  <ul>
-  <li><a class="cart_icon"><em>0</em></a></li>
+  <li><a class="cart_icon" href="getcart"><em>0</em></a></li>
   <li><a>合计：￥0.00</a></li>
   <li><a href="cart.jsp">立即下单</a></li>
  </ul>

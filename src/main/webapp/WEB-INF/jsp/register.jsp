@@ -25,14 +25,7 @@
 <meta name="viewport" content="initial-scale=1, width=device-width, maximum-scale=1, user-scalable=no">
 <link rel="stylesheet" type="text/css" href="../../css/style.css" />
 <script src="../../js/jquery.js"></script>
-<script>
-$(document).ready(function(){
-   $(".formarea li:last input[type='button']").click(function(){
-	   alert("测试跳转效果，程序对接予以删除!");
-	   location.href="login.jsp";
-	   });	
-});
-</script>
+
 </head>
 <body>
 <!--header-->
@@ -44,28 +37,53 @@ $(document).ready(function(){
 <ul class="formarea">
  <li>
   <label class="lit">账号：</label>
-  <input type="tel" placeholder="手机号码" class="textbox" placeholder="HZIT"/>
+  <input type="tel" placeholder="手机号码" class="textbox" placeholder="HZIT" id="telphone"/>
  </li>
  <li style="padding:0;"><a class="checkCode">获取手机校验码</a></li>
  <li>
   <label class="lit">校验码：</label>
-  <input type="number" placeholder="输入六位校验码" class="textbox"/>
+  <input type="number" placeholder="输入六位校验码" class="textbox" id="checkCode"/>
  </li>
  <li class="liLink">
-  <a href="article.jsp" class="fl">《用户协议》</a>
-  <a href="login.jsp" class="fr">已有账号，登录</a>
+  <a href="article" class="fl">《用户协议》</a>
+  <a href="login" class="fr">已有账号，登录</a>
  </li>
  <li>
-  <input type="button" value="立即注册"/>
+  <input type="button" value="立即注册" id="register-input"/>
  </li>
 </ul>
+<mark>
+
+</mark>
 <!--fixedNav:footer-->
 <div style="height:1.2rem;"></div>
 <nav>
- <a href="index.jsp" class="homeIcon">首页</a>
- <a href="category.jsp" class="categoryIcon">分类</a>
- <a href="cart.jsp" class="cartIcon">购物车</a>
- <a href="user.jsp" class="userIcon">我的</a>
+ <a href="index" class="homeIcon">首页</a>
+ <a href="category" class="categoryIcon">分类</a>
+ <a href="cart" class="cartIcon">购物车</a>
+ <a href="user" class="userIcon">我的</a>
 </nav>
 </body>
 </html>
+<script>
+ $("#register-input").on("click", function () {
+  console.log("loading");
+  var member = {}
+  member.memberMobile= $("#telphone").val();
+  member.checkCode = $("#checkCode").val();
+  //ajax方式提交表单
+  $.post("memberregister",member,function (result) {
+   console.log(result);
+   if (result==1) {
+    alert("注册成功")
+    location.href = "login";
+   } else if(result==2) {
+    alert("请输入正确的11位数号码")
+   }
+   else{
+    alert("注册失败，该用户已被注册")
+   }
+  });
+
+ });
+</script>

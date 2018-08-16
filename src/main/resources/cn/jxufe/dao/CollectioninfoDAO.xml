@@ -79,4 +79,23 @@
       c_time = #{cTime,jdbcType=TIMESTAMP}
     where cid = #{cid,jdbcType=INTEGER}
   </update>
+  <select id="findAll" resultMap="BaseResultMap" parameterType="int">
+    SELECT  * from collectioninfo where memberid=#{memberid}
+  </select>
+  <insert id="addCollection"  parameterType="cn.jxufe.entity.Collectioninfo" >
+     insert into collectioninfo (memberid, goodsid,
+      c_time)
+    values ( #{memberid,jdbcType=INTEGER}, #{goodsid,jdbcType=INTEGER},
+      sysdate())
+  </insert>
+
+  <delete id="deleteColletion" parameterType="cn.jxufe.entity.Collectioninfo">
+    delete from collectioninfo
+    where memberid=#{memberid,jdbcType=INTEGER} and goodsid=#{goodsid,jdbcType=INTEGER}
+  </delete>
+
+  <select id="judgeCollection" resultMap="BaseResultMap" parameterType="cn.jxufe.entity.Collectioninfo">
+    SELECT  * from collectioninfo
+    where memberid=#{memberid,jdbcType=INTEGER} and goodsid=#{goodsid,jdbcType=INTEGER}
+  </select>
 </mapper>

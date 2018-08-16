@@ -221,4 +221,36 @@
       member_pic = #{memberPic,jdbcType=VARCHAR}
     where member_id = #{memberId,jdbcType=INTEGER}
   </update>
+
+  <select id="login" resultMap="BaseResultMap">
+    SELECT * FROM Memberinfo WHERE member_Mobile=#{memberMobile} AND member_Passwd=#{memberPasswd}
+  </select>
+  <select id="ifregister" resultMap="BaseResultMap">
+    SELECT * FROM Memberinfo WHERE member_Mobile=#{memberMobile}
+  </select>
+  <insert id="register" parameterType="String">
+    INSERT INTO memberinfo (member_name,member_mobile,member_passwd,member_state) VALUES
+                          ("点击修改用户名",#{memberMobile},"123456",1)
+  </insert>
+
+  <update id="changepwd" parameterType="cn.jxufe.entity.Memberinfo">
+    UPDATE memberinfo SET member_passwd = #{memberPasswd} WHERE member_id = #{memberId}
+  </update>
+
+  <update id="changeName" parameterType="cn.jxufe.entity.Memberinfo">
+    UPDATE memberinfo SET member_name = #{memberName} WHERE member_id = #{memberId}
+  </update>
+
+  <select id="getMemberName" resultMap="BaseResultMap">
+    SELECT * FROM Memberinfo WHERE  member_id = #{memberId}
+  </select>
+
+  <update id="changePhone" parameterType="cn.jxufe.entity.Memberinfo">
+    UPDATE memberinfo SET member_mobile = #{memberMobile} WHERE member_id = #{memberId}
+  </update>
+
+  <select id="findByMemberId" resultMap="BaseResultMap">
+    SELECT  * from memberinfo WHERE member_id=#{memberId}
+  </select>
+
 </mapper>

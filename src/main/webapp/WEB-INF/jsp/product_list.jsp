@@ -37,22 +37,31 @@ $(document).ready(function(){
 		  });
 	  });
    //飞入动画，具体根据实际情况调整
-   $(".addToCart").click(function(){
-	        $(".hoverCart a").html(parseInt($(".hoverCart a").html())+1);/*测试+1*/
-            var shopOffset = $(".hoverCart").offset();
-            var cloneDiv = $(this).parent().siblings(".goodsPic").clone();
-            var proOffset = $(this).parent().siblings(".goodsPic").offset();
-            cloneDiv.css({ "position": "absolute", "top": proOffset.top, "left": proOffset.left });
-            $(this).parent().siblings(".goodsPic").parent().append(cloneDiv);
-            cloneDiv.animate({
-				width:0,
-				height:0,
-                left: shopOffset.left,
-                top: shopOffset.top,
-				opacity:1
-            },"slow");
-	   });
-});
+ function donghua(obj){
+  obj=$(obj);  //将普通的对象转换成 jquery对象
+  //修改购物车数量的显示
+  $(".hoverCart a").html(parseInt($(".hoverCart a").html())+1);/*测试+1*/
+  //拿到样式类别为hoverCart的坐标
+  var shopOffset = $(".hoverCart").offset();
+  //复制图片的元素
+  var cloneDiv = obj.parent().siblings(".goodsPic").clone();
+  //获取图片的坐标
+  var proOffset = obj.parent().siblings(".goodsPic").offset();
+  //设置这个图片初始样式
+  cloneDiv.css({ "position": "absolute", "top": proOffset.top, "left": proOffset.left });
+  //将图片追加到类别为goodsPic的父元素上面
+  obj.parent().siblings(".goodsPic").parent().append(cloneDiv);
+  //开始一个移动的动画效果
+  cloneDiv.animate({
+   width:0,
+   height:0,
+   left: shopOffset.left,
+   top: shopOffset.top,
+   opacity:1
+  },5000,function(){
+   $(this).remove();
+  });
+ }
 </script>
 </head>
 <body style="background:white;">
@@ -78,91 +87,25 @@ $(document).ready(function(){
 <!--productList-->
 <section class="productList">
   <ul>
+   <c:forEach items="${searchlist}" var="sl">
    <li>
     <a href="product.jsp" class="goodsPic">
-     <img src="../../upload/goods001.jpg"/>
+     <img src="${sl.goodsImage}"/>
     </a>
     <div class="goodsInfor">
      <h2>
-      <a href="product.jsp">水晶骷髅头 工艺品</a>
+      <a href="product.jsp">${sl.goodsName}</a>
      </h2>
      <p>
-      <del>5.90</del>
+      <del>${sl.goodsOldPrice}</del>
      </p>
      <p>
-      <strong class="price">3.90</strong>
+      <strong class="price">${sl.goodsPrice}</strong>
      </p>
      <a class="addToCart">&#126;</a>
     </div>
    </li>
-   <li>
-    <a href="product.jsp" class="goodsPic">
-     <img src="../../upload/goods002.jpg"/>
-    </a>
-    <div class="goodsInfor">
-     <h2>
-      <a href="product.jsp">时尚烟灰缸 玻璃制品</a>
-     </h2>
-     <p>
-      <del>12.90</del>
-     </p>
-     <p>
-      <strong class="price">8.90</strong>
-     </p>
-     <a class="addToCart">&#126;</a>
-    </div>
-   </li>
-   <li>
-    <a href="product.jsp" class="goodsPic">
-     <img src="../../upload/goods003.jpg"/>
-    </a>
-    <div class="goodsInfor">
-     <h2>
-      <a href="product.jsp">花杯 带底座</a>
-     </h2>
-     <p>
-      <del>9.90</del>
-     </p>
-     <p>
-      <strong class="price">6.90</strong>
-     </p>
-     <a class="addToCart">&#126;</a>
-    </div>
-   </li>
-   <li>
-    <a href="product.jsp" class="goodsPic">
-     <img src="../../upload/goods005.jpg"/>
-    </a>
-    <div class="goodsInfor">
-     <h2>
-      <a href="product.jsp">新婚天鹅 玻璃工艺品</a>
-     </h2>
-     <p>
-      <del>9.90</del>
-     </p>
-     <p>
-      <strong class="price">6.90</strong>
-     </p>
-     <a class="addToCart">&#126;</a>
-    </div>
-   </li>
-   <li>
-    <a href="product.jsp" class="goodsPic">
-     <img src="../../upload/goods004.jpg"/>
-    </a>
-    <div class="goodsInfor">
-     <h2>
-      <a href="product.jsp">招财貔貅</a>
-     </h2>
-     <p>
-      <del>9.90</del>
-     </p>
-     <p>
-      <strong class="price">6.90</strong>
-     </p>
-     <a class="addToCart">&#126;</a>
-    </div>
-   </li>
+   </c:forEach>
   </ul>
   <a class="more_btn">加载更多</a>
 </section>

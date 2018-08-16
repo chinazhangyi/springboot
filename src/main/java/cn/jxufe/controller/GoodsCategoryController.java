@@ -7,9 +7,11 @@ import cn.jxufe.service.GoodsInfoServer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Zhang on 2018/8/8.
@@ -18,14 +20,24 @@ import java.util.List;
 public class GoodsCategoryController {
     @Autowired
     private GoodsCategoryService goodsCategoryService;
+
+
     @Autowired
     private GoodsInfoServer goodsInfoServer;
+
     @RequestMapping("category")
-    public String findtype(ModelMap map,Integer catId){
+    public String findgoodskind(ModelMap map){
         List<GoodsCategory> gtype = goodsCategoryService.findtype();
-        List<Goodsinfo> goodsByType = goodsInfoServer.findGoodsByType(catId);
-        map.put("goodsByType",goodsByType);
         map.put("gtype",gtype);
         return "category";
+    }
+
+    @RequestMapping("category{cId}")
+    public Map findtype(ModelMap map,@PathVariable Integer cId){
+       // List<GoodsCategory> gtype = goodsCategoryService.findtype();
+        List<Goodsinfo> goodsByType = goodsInfoServer.findGoodsByType(cId);
+        map.put("goodsByType",goodsByType);
+       // map.put("gtype",gtype);
+        return map;
     }
 }

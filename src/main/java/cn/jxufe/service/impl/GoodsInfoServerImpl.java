@@ -29,9 +29,52 @@ public class GoodsInfoServerImpl implements GoodsInfoServer {
     }
 
     @Override
-    public List<Goodsinfo> findGoodsByType(Integer catId) {
-        return goodsinfoDAO.findGoodsByType(catId);
+    public List<Goodsinfo> findGoodsByType(Integer cId) {
+        return goodsinfoDAO.findGoodsByType(cId);
     }
 
+    @Override
+    public Goodsinfo findByGoodsId(int goodsId) {
+        return goodsinfoDAO.findByGoodsId(goodsId);
+    }
 
+    @Override
+    public int addGooods(Goodsinfo goodsinfo) {
+        return goodsinfoDAO.addGooods(goodsinfo);
+    }
+
+    @Override
+    public int addgoods_collect_num( int goodsid) {
+        return goodsinfoDAO.addgoods_collect_num(goodsid);
+    }
+
+    @Override
+    public int addthumbs_up_num( int goodsid) {
+        return goodsinfoDAO.addthumbs_up_num(goodsid);
+    }
+
+    @Override
+    public int cutthumbs_up_num(int goodsid) {
+        return goodsinfoDAO.cutthumbs_up_num(goodsid);
+    }
+
+    @Override
+    public int addcomment_num(int goodsid) {
+        return goodsinfoDAO.addcomment_num(goodsid);
+    }
+
+    @Override
+    public int cutcomment_num(int goodsid) {
+        return goodsinfoDAO.cutcomment_num(goodsid);
+    }
+
+    @Override
+    public int cutgoods_collect_num(int goodsid) {
+        return goodsinfoDAO.cutgoods_collect_num(goodsid);
+    }
+
+    @Override
+    public List<Goodsinfo> findGoodsByMenberid(String memberId) {
+        return goodsinfoDAO.findGoodsByMenberid(memberId);
+    }
 }

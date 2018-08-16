@@ -79,4 +79,23 @@
       searchTime = #{searchtime,jdbcType=TIMESTAMP}
     where s_id = #{sId,jdbcType=INTEGER}
   </update>
+
+  <insert id="addSearchinfo" parameterType="cn.jxufe.entity.Searchinfo">
+    insert into searchinfo (search_key, member_id,
+    searchTime)
+    values ( #{searchKey,jdbcType=VARCHAR}, #{memberId,jdbcType=INTEGER},
+    sysdate())
+  </insert>
+  <select id="findById" resultMap="BaseResultMap" parameterType="int">
+    SELECT * from Searchinfo where member_id=#{memberId}
+  </select>
+  <delete id="deleteSearchinfoBymemberId" parameterType="int" >
+    delete from searchinfo where member_id=#{memberId}
+  </delete>
+
+
+  <select id="findNewSearchinfo" resultMap="BaseResultMap">
+  SELECT  * from searchinfo ORDER BY s_id DESC limit 1;
+  </select>
+
 </mapper>

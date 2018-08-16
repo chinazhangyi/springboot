@@ -277,12 +277,54 @@
   <select id="findGoodsByType" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     SELECT * FROM goodsinfo
      <where>
-       <if test="catId!=null">
-         gc_id=#{catId}
+       <if test="cId!=null">
+         gc_id=#{cId}
        </if>
      </where>
 
 
+  </select>
+
+  <select id="findByGoodsId" resultMap="BaseResultMap">
+    SELECT * from `goodsinfo` WHERE goods_id=#{goodsId}
+  </select>
+  <select id="findByGoodsNameLike" resultMap="BaseResultMap" parameterType="String">
+    select * from goodsinfo where goods_name LIKE concat('%',#{goodsName},'%')
+  </select>
+  <insert id="addGooods" parameterType="cn.jxufe.entity.Goodsinfo">
+    insert into goodsinfo (goods_subtitle,goods_image,goods_description,member_id,update_time, create_time,
+    goods_name,gc_id , gc_name, goods_click, goods_state, goods_commend,comment_num,salenum_num,goods_collect_num,is_del)
+    values ( #{goodsSubtitle,jdbcType=VARCHAR},#{goodsImage,jdbcType=VARCHAR},
+    #{goodsDescription,jdbcType=VARCHAR},#{memberId,jdbcType=VARCHAR},
+    2018,sysdate(),
+    0,0,0,0,0,0,0,0,0,0
+    )
+  </insert>
+
+  <update id="addthumbs_up_num" parameterType="int">
+    update goodsinfo set thumbs_up_num=thumbs_up_num+1 WHERE  goods_id = #{goodsid,jdbcType=INTEGER}
+  </update>
+  <update id="cutthumbs_up_num" parameterType="int">
+    update goodsinfo set thumbs_up_num=thumbs_up_num-1 WHERE  goods_id = #{goodsid,jdbcType=INTEGER}
+  </update>
+  <update id="addgoods_collect_num" parameterType="int">
+    update goodsinfo set goods_collect_num=goods_collect_num+1  WHERE  goods_id = #{goodsid,jdbcType=INTEGER}
+  </update>
+
+  <update id="cutgoods_collect_num" parameterType="int">
+    update goodsinfo set goods_collect_num=goods_collect_num-1  WHERE  goods_id = #{goodsid,jdbcType=INTEGER}
+  </update>
+
+  <update id="addcomment_num" parameterType="int">
+    update goodsinfo set comment_num=comment_num+1  WHERE  goods_id = #{goodsid,jdbcType=INTEGER}
+  </update>
+
+  <update id="cutcomment_num" parameterType="int">
+    update goodsinfo set comment_num=comment_num-1  WHERE  goods_id = #{goodsid,jdbcType=INTEGER}
+  </update>
+
+  <select id="findGoodsByMenberid" parameterType="String" resultMap="BaseResultMap">
+    select * from goodsinfo where member_id=#{memberId};
   </select>
 
 </mapper>

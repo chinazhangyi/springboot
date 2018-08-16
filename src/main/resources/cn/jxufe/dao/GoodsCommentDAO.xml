@@ -8,9 +8,9 @@
     <result column="scomm_memberid" jdbcType="INTEGER" property="scommMemberid" />
     <result column="scomm_membername" jdbcType="VARCHAR" property="scommMembername" />
     <result column="scomm_memberavatar" jdbcType="VARCHAR" property="scommMemberavatar" />
-    <result column="scomm_time" jdbcType="VARCHAR" property="scommTime" />
-    <result column="create_time" jdbcType="BIGINT" property="createTime" />
-    <result column="update_time" jdbcType="BIGINT" property="updateTime" />
+    <result column="scomm_time" jdbcType="TIMESTAMP" property="scommTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
   <sql id="Base_Column_List">
     scomm_id, goodis_id, scomm_content, scomm_memberid, scomm_membername, scomm_memberavatar, 
@@ -33,7 +33,7 @@
       )
     values (#{scommId,jdbcType=INTEGER}, #{goodisId,jdbcType=INTEGER}, #{scommContent,jdbcType=VARCHAR}, 
       #{scommMemberid,jdbcType=INTEGER}, #{scommMembername,jdbcType=VARCHAR}, #{scommMemberavatar,jdbcType=VARCHAR}, 
-      #{scommTime,jdbcType=VARCHAR}, #{createTime,jdbcType=BIGINT}, #{updateTime,jdbcType=BIGINT}
+      #{scommTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
       )
   </insert>
   <insert id="insertSelective" parameterType="cn.jxufe.entity.GoodsComment">
@@ -87,13 +87,13 @@
         #{scommMemberavatar,jdbcType=VARCHAR},
       </if>
       <if test="scommTime != null">
-        #{scommTime,jdbcType=VARCHAR},
+        #{scommTime,jdbcType=TIMESTAMP},
       </if>
       <if test="createTime != null">
-        #{createTime,jdbcType=BIGINT},
+        #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="updateTime != null">
-        #{updateTime,jdbcType=BIGINT},
+        #{updateTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -116,13 +116,13 @@
         scomm_memberavatar = #{scommMemberavatar,jdbcType=VARCHAR},
       </if>
       <if test="scommTime != null">
-        scomm_time = #{scommTime,jdbcType=VARCHAR},
+        scomm_time = #{scommTime,jdbcType=TIMESTAMP},
       </if>
       <if test="createTime != null">
-        create_time = #{createTime,jdbcType=BIGINT},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="updateTime != null">
-        update_time = #{updateTime,jdbcType=BIGINT},
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     where scomm_id = #{scommId,jdbcType=INTEGER}
@@ -134,9 +134,26 @@
       scomm_memberid = #{scommMemberid,jdbcType=INTEGER},
       scomm_membername = #{scommMembername,jdbcType=VARCHAR},
       scomm_memberavatar = #{scommMemberavatar,jdbcType=VARCHAR},
-      scomm_time = #{scommTime,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=BIGINT},
-      update_time = #{updateTime,jdbcType=BIGINT}
+      scomm_time = #{scommTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
     where scomm_id = #{scommId,jdbcType=INTEGER}
   </update>
+
+  <select id="findAll" resultMap="BaseResultMap">
+    SELECT * from goods_comment order by  scomm_time DESC
+  </select>
+
+  <insert id="addComment" parameterType="cn.jxufe.entity.GoodsComment">
+    insert into goods_comment (goodis_id, scomm_content,
+    scomm_memberid,scomm_time,scomm_memberavatar,scomm_membername
+    )
+    values ( #{goodisId,jdbcType=INTEGER}, #{scommContent,jdbcType=VARCHAR},#{scommMemberid,jdbcType=INTEGER}
+    ,sysdate(),#{scommMemberavatar,jdbcType=VARCHAR},#{scommMembername,jdbcType=VARCHAR}
+    )
+  </insert>
+  <select id="findCommentByGoodId" resultMap="BaseResultMap">
+    SELECT * from goods_comment where goodis_id=#{goodisId} order by  scomm_time DESC
+  </select>
+
 </mapper>
